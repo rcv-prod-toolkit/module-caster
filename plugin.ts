@@ -1,4 +1,4 @@
-import type { PluginContext } from 'league-prod-toolkit/core/modules/Module'
+import type { PluginContext } from 'rcv-prod-toolkit-types'
 import type { GfxState } from './types/GfxState'
 
 const namespace = 'rcv-caster';
@@ -219,13 +219,4 @@ module.exports = async (ctx: PluginContext) => {
   });
 
   await ctx.LPTE.await('lpt', 'ready', 150000);
-
-  ctx.LPTE.emit({
-    meta: {
-      type: 'createCollection',
-      namespace: 'database',
-      version: 1
-    },
-    collection: 'caster'
-  });
 }

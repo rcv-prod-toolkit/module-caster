@@ -1,8 +1,8 @@
 {
-  "name": "rcv-caster",
+  "name": "module-caster",
   "version": "1.0.0",
   "description": "Module that provides GFX elements for the current caster",
-  "author": "Himyu",
+  "author": "RCVolus",
   "license": "MIT",
   "toolkit": {
     "modes": [
@@ -13,10 +13,8 @@
     },
     "needsBuild": true
   },
-  "dependencies": {
-    "league-prod-toolkit": "file:../.."
-  },
   "devDependencies": {
+    "rcv-prod-toolkit-types": "^1.0.1",
     "typescript": "^4.3.2"
   },
   "scripts": {
