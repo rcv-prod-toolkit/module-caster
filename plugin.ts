@@ -1,8 +1,6 @@
 import type { PluginContext } from '@rcv-prod-toolkit/types'
 import type { GfxState } from './types/GfxState'
 
-const namespace = 'rcv-caster';
-
 const initialState : GfxState = {
   casterSets: {
     1: [],
@@ -11,6 +9,8 @@ const initialState : GfxState = {
 }
 
 module.exports = async (ctx: PluginContext) => {
+  const namespace = ctx.plugin.module.getName();
+
   let gfxState = initialState;
 
   // Register new UI page
@@ -21,9 +21,9 @@ module.exports = async (ctx: PluginContext) => {
       version: 1
     },
     pages: [{
-      name: 'OP: rcv-caster',
+      name: 'Caster',
       frontend: 'frontend',
-      id : 'op-rcv-caster'
+      id : `op-${namespace}`
     }]
   });
 
@@ -45,7 +45,7 @@ module.exports = async (ctx: PluginContext) => {
     const casterRes1 = await ctx.LPTE.request({
       meta: {
         type: 'request',
-        namespace: 'database',
+        namespace: 'plugin-database',
         version: 1
       },
       collection: 'caster',
@@ -54,7 +54,7 @@ module.exports = async (ctx: PluginContext) => {
     const casterRes2 = await ctx.LPTE.request({
       meta: {
         type: 'request',
-        namespace: 'database',
+        namespace: 'plugin-database',
         version: 1
       },
       collection: 'caster',
@@ -81,7 +81,7 @@ module.exports = async (ctx: PluginContext) => {
     await ctx.LPTE.request({
       meta: {
         type: 'deleteOne',
-        namespace: 'database',
+        namespace: 'plugin-database',
         version: 1
       },
       collection: 'caster',
@@ -91,7 +91,7 @@ module.exports = async (ctx: PluginContext) => {
     const res = await ctx.LPTE.request({
       meta: {
         type: 'request',
-        namespace: 'database',
+        namespace: 'plugin-database',
         version: 1
       },
       collection: 'caster',
@@ -116,7 +116,7 @@ module.exports = async (ctx: PluginContext) => {
     await ctx.LPTE.request({
       meta: {
         type: 'insertOne',
-        namespace: 'database',
+        namespace: 'plugin-database',
         version: 1
       },
       collection: 'caster',
@@ -130,7 +130,7 @@ module.exports = async (ctx: PluginContext) => {
     const res = await ctx.LPTE.request({
       meta: {
         type: 'request',
-        namespace: 'database',
+        namespace: 'plugin-database',
         version: 1
       },
       collection: 'caster',
@@ -155,7 +155,7 @@ module.exports = async (ctx: PluginContext) => {
     const res = await ctx.LPTE.request({
       meta: {
         type: 'request',
-        namespace: 'database',
+        namespace: 'plugin-database',
         version: 1
       },
       collection: 'caster',

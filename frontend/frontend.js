@@ -1,12 +1,14 @@
-$('#caster-embed-1').val(`${location.href}/gfx.html?set=1`);
-$('#caster-embed-2').val(`${location.href}/gfx.html?set=2`);
+$('#caster-embed-1').val(`${location.href}/gfx.html?set=1${window.apiKey !== null ? '&apikey' + window.apiKey : ''}`);
+$('#caster-embed-2').val(`${location.href}/gfx.html?set=2${window.apiKey !== null ? '&apikey' + window.apiKey : ''}`);
+
+const namespace = 'module-caster'
 
 $('#add-caster-form').on('submit', (e) => {
   e.preventDefault()
 
   window.LPTE.emit({
     meta: {
-      namespace: 'rcv-caster',
+      namespace,
       type: 'add-caster',
       version: 1
     },
@@ -25,7 +27,7 @@ $('#update-caster-form').on('submit', (e) => {
 
   window.LPTE.emit({
     meta: {
-      namespace: 'rcv-caster',
+      namespace,
       type: 'set',
       version: 1
     },
@@ -42,7 +44,7 @@ $('#update-caster-2-form').on('submit', (e) => {
 
   window.LPTE.emit({
     meta: {
-      namespace: 'rcv-caster',
+      namespace,
       type: 'set',
       version: 1
     },
@@ -57,7 +59,7 @@ $('#update-caster-2-form').on('submit', (e) => {
 function deleteCaster (_id) {
   window.LPTE.emit({
     meta: {
-      namespace: 'rcv-caster',
+      namespace,
       type: 'delete-caster',
       version: 1
     },
@@ -68,7 +70,7 @@ function deleteCaster (_id) {
 function swap (set = 1) {
   window.LPTE.emit({
     meta: {
-      namespace: 'rcv-caster',
+      namespace,
       type: 'swop',
       version: 1
     },
@@ -79,7 +81,7 @@ function swap (set = 1) {
 function unset (set = 1) {
   window.LPTE.emit({
     meta: {
-      namespace: 'rcv-caster',
+      namespace,
       type: 'unset',
       version: 1
     },
@@ -90,7 +92,7 @@ function unset (set = 1) {
 async function initUi () {
   const data = await window.LPTE.request({
     meta: {
-      namespace: 'rcv-caster',
+      namespace,
       type: 'request',
       version: 1
     }
@@ -98,7 +100,7 @@ async function initUi () {
 
   const casterData = await window.LPTE.request({
     meta: {
-      namespace: 'rcv-caster',
+      namespace,
       type: 'request-caster',
       version: 1
     }
@@ -111,9 +113,9 @@ async function initUi () {
 }
 
 function displayData (data) {
-  $('#caster-one').val(''),
+  $('#caster-one').val('')
   $('#caster-two').val('')
-  $('#caster-2-one').val(''),
+  $('#caster-2-one').val('')
   $('#caster-2-two').val('')
 
   console.log(data)
@@ -184,8 +186,8 @@ function displayCasterSelects (data) {
 
 window.LPTE.onready(() => {
   initUi()
-  window.LPTE.on('rcv-caster', 'update', displayData)
-  window.LPTE.on('rcv-caster', 'update-caster-set', (data) => {
+  window.LPTE.on(namespace, 'update', displayData)
+  window.LPTE.on(namespace, 'update-caster-set', (data) => {
     displayCasterTable(data)
     displayCasterSelects(data)
   })
