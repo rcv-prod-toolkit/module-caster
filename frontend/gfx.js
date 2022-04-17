@@ -1,6 +1,8 @@
 const urlSearchParams = new URLSearchParams(window.location.search);
 const params = Object.fromEntries(urlSearchParams.entries());
 
+const namespace = 'module-caster'
+
 const set = params.set || 1
 
 const casterOne = document.querySelector('#caster-one')
@@ -44,14 +46,14 @@ function getSocial(platform, handle) {
 window.LPTE.onready(async () => {
   const casterData = await window.LPTE.request({
     meta: {
-      namespace: 'rcv-caster',
+      namespace,
       type: 'request',
       version: 1
     }
   })
   displayCaster(casterData)
 
-  window.LPTE.on('rcv-caster', 'update', e => {
+  window.LPTE.on(namespace, 'update', e => {
     displayCaster(e)
   })
 })

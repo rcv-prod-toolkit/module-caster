@@ -118,7 +118,7 @@ function displayData (data) {
   $('#caster-2-one').val('')
   $('#caster-2-two').val('')
 
-  console.log(data)
+
   $('#caster-one').val(data.casterSets[1][0]._id || '')
   $('#caster-two').val(data.casterSets[1][1]._id || '')
   $('#caster-2-one').val(data.casterSets[2][0]._id || '')
