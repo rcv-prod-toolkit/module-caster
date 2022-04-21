@@ -1,5 +1,5 @@
-$('#caster-embed-1').val(`${location.href}/gfx.html?set=1${window.apiKey !== null ? '&apikey' + window.apiKey : ''}`);
-$('#caster-embed-2').val(`${location.href}/gfx.html?set=2${window.apiKey !== null ? '&apikey' + window.apiKey : ''}`);
+$('#caster-embed-1').val(`${location.href}/gfx.html?set=1${window.apiKey !== null ? '&apikey=' + window.apiKey : ''}`);
+$('#caster-embed-2').val(`${location.href}/gfx.html?set=2${window.apiKey !== null ? '&apikey=' + window.apiKey : ''}`);
 
 const namespace = 'module-caster'
 
