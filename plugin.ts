@@ -61,7 +61,6 @@ module.exports = async (ctx: PluginContext) => {
       id: e.caster[1]
     })
 
-    console.log(JSON.stringify(casterRes1), JSON.stringify(casterRes2))
     if (casterRes1 === undefined || casterRes2 === undefined) {
       return ctx.log.warn('one or more of the selected casters could not be found')
     }
