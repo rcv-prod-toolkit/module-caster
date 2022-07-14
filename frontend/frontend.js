@@ -56,14 +56,14 @@ $('#update-caster-2-form').on('submit', (e) => {
   })
 })
 
-function deleteCaster (_id) {
+function deleteCaster (id) {
   window.LPTE.emit({
     meta: {
       namespace,
       type: 'delete-caster',
       version: 1
     },
-    _id
+    id
   })
 }
 
@@ -119,10 +119,10 @@ function displayData (data) {
   $('#caster-2-two').val('')
 
 
-  $('#caster-one').val(data.casterSets[1][0]?._id || '')
-  $('#caster-two').val(data.casterSets[1][1]?._id || '')
-  $('#caster-2-one').val(data.casterSets[2][0]?._id || '')
-  $('#caster-2-two').val(data.casterSets[2][1]?._id || '')
+  $('#caster-one').val(data.casterSets[1][0]?.id || '')
+  $('#caster-two').val(data.casterSets[1][1]?.id || '')
+  $('#caster-2-one').val(data.casterSets[2][0]?.id || '')
+  $('#caster-2-two').val(data.casterSets[2][1]?.id || '')
 }
 
 const casterTableBody = document.querySelector('#caster-table')
@@ -152,7 +152,7 @@ function displayCasterTable (data) {
     deleteBtn.classList.add('btn', 'btn-danger')
     deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i>'
     deleteBtn.onclick = () => {
-      deleteCaster(c._id)
+      deleteCaster(c.id)
     }
     deleteTd.appendChild(deleteBtn)
     row.appendChild(deleteTd)
@@ -169,7 +169,7 @@ const casterFour = document.querySelector('#caster-2-two')
 function displayCasterSelects (data) {
   var length = casterOne.options.length;
 
-  for (i = length-1; i >= 1; i--) {
+  for (let i = length-1; i >= 1; i--) {
     casterOne.options[i] = null;
     casterTwo.options[i] = null;
     casterThree.options[i] = null;
@@ -177,10 +177,10 @@ function displayCasterSelects (data) {
   }
 
   data.caster.forEach((c, i) => {
-    casterOne.options.add(new Option(c.name, c._id), [i+1])
-    casterTwo.options.add(new Option(c.name, c._id), [i+1])
-    casterThree.options.add(new Option(c.name, c._id), [i+1])
-    casterFour.options.add(new Option(c.name, c._id), [i+1])
+    casterOne.options.add(new Option(c.name, c.id), [i+1])
+    casterTwo.options.add(new Option(c.name, c.id), [i+1])
+    casterThree.options.add(new Option(c.name, c.id), [i+1])
+    casterFour.options.add(new Option(c.name, c.id), [i+1])
   })
 }
 

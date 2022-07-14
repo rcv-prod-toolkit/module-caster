@@ -61,11 +61,12 @@ module.exports = async (ctx: PluginContext) => {
       id: e.caster[1]
     })
 
+    console.log(JSON.stringify(casterRes1), JSON.stringify(casterRes2))
     if (casterRes1 === undefined || casterRes2 === undefined) {
       return ctx.log.warn('one or more of the selected casters could not be found')
     }
 
-    gfxState.casterSets[set] = [casterRes1.data[0], casterRes2.data[0]]
+    gfxState.casterSets[set] = [casterRes1.data, casterRes2.data]
 
     ctx.LPTE.emit({
       meta: {
@@ -85,7 +86,7 @@ module.exports = async (ctx: PluginContext) => {
         version: 1
       },
       collection: 'caster',
-      id: e._id
+      id: e.id
     });
 
     const res = await ctx.LPTE.request({
