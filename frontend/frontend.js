@@ -1,5 +1,13 @@
-$('#caster-embed-1').val(`${location.href}/gfx.html?set=1${window.apiKey !== null ? '&apikey=' + window.apiKey : ''}`);
-$('#caster-embed-2').val(`${location.href}/gfx.html?set=2${window.apiKey !== null ? '&apikey=' + window.apiKey : ''}`);
+$('#caster-embed-1').val(
+  `${location.href}/gfx.html?set=1${
+    window.apiKey !== null ? '&apikey=' + window.apiKey : ''
+  }`
+)
+$('#caster-embed-2').val(
+  `${location.href}/gfx.html?set=2${
+    window.apiKey !== null ? '&apikey=' + window.apiKey : ''
+  }`
+)
 
 const namespace = 'module-caster'
 
@@ -14,7 +22,7 @@ $('#add-caster-form').on('submit', (e) => {
     },
     name: $('#name').val(),
     platform: $('#platform').val(),
-    handle: $('#handle').val(),
+    handle: $('#handle').val()
   })
 
   $('#name').val('')
@@ -32,10 +40,7 @@ $('#update-caster-form').on('submit', (e) => {
       version: 1
     },
     set: 1,
-    caster: [
-      $('#caster-one').val(),
-      $('#caster-two').val()
-    ]
+    caster: [$('#caster-one').val(), $('#caster-two').val()]
   })
 })
 
@@ -49,14 +54,11 @@ $('#update-caster-2-form').on('submit', (e) => {
       version: 1
     },
     set: 2,
-    caster: [
-      $('#caster-2-one').val(),
-      $('#caster-2-two').val()
-    ]
+    caster: [$('#caster-2-one').val(), $('#caster-2-two').val()]
   })
 })
 
-function deleteCaster (id) {
+function deleteCaster(id) {
   window.LPTE.emit({
     meta: {
       namespace,
@@ -67,7 +69,7 @@ function deleteCaster (id) {
   })
 }
 
-function swap (set = 1) {
+function swap(set = 1) {
   window.LPTE.emit({
     meta: {
       namespace,
@@ -78,7 +80,7 @@ function swap (set = 1) {
   })
 }
 
-function unset (set = 1) {
+function unset(set = 1) {
   window.LPTE.emit({
     meta: {
       namespace,
@@ -89,7 +91,7 @@ function unset (set = 1) {
   })
 }
 
-async function initUi () {
+async function initUi() {
   const data = await window.LPTE.request({
     meta: {
       namespace,
@@ -112,12 +114,11 @@ async function initUi () {
   displayData(data)
 }
 
-function displayData (data) {
+function displayData(data) {
   $('#caster-one').val('')
   $('#caster-two').val('')
   $('#caster-2-one').val('')
   $('#caster-2-two').val('')
-
 
   $('#caster-one').val(data.casterSets[1][0]?.id || '')
   $('#caster-two').val(data.casterSets[1][1]?.id || '')
@@ -127,10 +128,10 @@ function displayData (data) {
 
 const casterTableBody = document.querySelector('#caster-table')
 
-function displayCasterTable (data) {
+function displayCasterTable(data) {
   casterTableBody.innerHTML = ''
 
-  data.caster.forEach(c => {
+  data.caster.forEach((c) => {
     const row = document.createElement('tr')
 
     const nameTd = document.createElement('td')
@@ -138,9 +139,10 @@ function displayCasterTable (data) {
     row.appendChild(nameTd)
 
     const platformTd = document.createElement('td')
-    platformTd.innerHTML = c.platform === 'Twitch'
-      ? '<i class="fab fa-twitch"></i>'
-      : '<i class="fab fa-twitter"></i>'
+    platformTd.innerHTML =
+      c.platform === 'Twitch'
+        ? '<i class="fab fa-twitch"></i>'
+        : '<i class="fab fa-twitter"></i>'
     row.appendChild(platformTd)
 
     const handleTd = document.createElement('td')
@@ -166,21 +168,21 @@ const casterTwo = document.querySelector('#caster-two')
 const casterThree = document.querySelector('#caster-2-one')
 const casterFour = document.querySelector('#caster-2-two')
 
-function displayCasterSelects (data) {
-  var length = casterOne.options.length;
+function displayCasterSelects(data) {
+  var length = casterOne.options.length
 
-  for (let i = length-1; i >= 1; i--) {
-    casterOne.options[i] = null;
-    casterTwo.options[i] = null;
-    casterThree.options[i] = null;
-    casterFour.options[i] = null;
+  for (let i = length - 1; i >= 1; i--) {
+    casterOne.options[i] = null
+    casterTwo.options[i] = null
+    casterThree.options[i] = null
+    casterFour.options[i] = null
   }
 
   data.caster.forEach((c, i) => {
-    casterOne.options.add(new Option(c.name, c.id), [i+1])
-    casterTwo.options.add(new Option(c.name, c.id), [i+1])
-    casterThree.options.add(new Option(c.name, c.id), [i+1])
-    casterFour.options.add(new Option(c.name, c.id), [i+1])
+    casterOne.options.add(new Option(c.name, c.id), [i + 1])
+    casterTwo.options.add(new Option(c.name, c.id), [i + 1])
+    casterThree.options.add(new Option(c.name, c.id), [i + 1])
+    casterFour.options.add(new Option(c.name, c.id), [i + 1])
   })
 }
 

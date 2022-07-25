@@ -1,7 +1,7 @@
 import type { PluginContext } from '@rcv-prod-toolkit/types'
 import type { GfxState } from './types/GfxState'
 
-const initialState : GfxState = {
+const initialState: GfxState = {
   casterSets: {
     1: [],
     2: []
@@ -9,9 +9,9 @@ const initialState : GfxState = {
 }
 
 module.exports = async (ctx: PluginContext) => {
-  const namespace = ctx.plugin.module.getName();
+  const namespace = ctx.plugin.module.getName()
 
-  let gfxState = initialState;
+  let gfxState = initialState
 
   // Register new UI page
   ctx.LPTE.emit({
@@ -20,12 +20,14 @@ module.exports = async (ctx: PluginContext) => {
       namespace: 'ui',
       version: 1
     },
-    pages: [{
-      name: 'Caster',
-      frontend: 'frontend',
-      id : `op-${namespace}`
-    }]
-  });
+    pages: [
+      {
+        name: 'Caster',
+        frontend: 'frontend',
+        id: `op-${namespace}`
+      }
+    ]
+  })
 
   // Answer requests to get state
   ctx.LPTE.on(namespace, 'request', async (e: any) => {
@@ -36,11 +38,11 @@ module.exports = async (ctx: PluginContext) => {
         version: 1
       },
       casterSets: gfxState.casterSets
-    });
-  });
+    })
+  })
 
   ctx.LPTE.on(namespace, 'set', async (e: any) => {
-    const set : 1 | 2 = e.set || 1
+    const set: 1 | 2 = e.set || 1
 
     const casterRes1 = await ctx.LPTE.request({
       meta: {
@@ -62,7 +64,9 @@ module.exports = async (ctx: PluginContext) => {
     })
 
     if (casterRes1 === undefined || casterRes2 === undefined) {
-      return ctx.log.warn('one or more of the selected casters could not be found')
+      return ctx.log.warn(
+        'one or more of the selected casters could not be found'
+      )
     }
 
     gfxState.casterSets[set] = [casterRes1.data, casterRes2.data]
@@ -74,8 +78,8 @@ module.exports = async (ctx: PluginContext) => {
         version: 1
       },
       casterSets: gfxState.casterSets
-    });
-  });
+    })
+  })
 
   ctx.LPTE.on(namespace, 'delete-caster', async (e: any) => {
     await ctx.LPTE.request({
@@ -86,7 +90,7 @@ module.exports = async (ctx: PluginContext) => {
       },
       collection: 'caster',
       id: e.id
-    });
+    })
 
     const res = await ctx.LPTE.request({
       meta: {
@@ -109,8 +113,8 @@ module.exports = async (ctx: PluginContext) => {
         version: 1
       },
       caster: res.data
-    });
-  });
+    })
+  })
 
   ctx.LPTE.on(namespace, 'add-caster', async (e: any) => {
     await ctx.LPTE.request({
@@ -123,9 +127,9 @@ module.exports = async (ctx: PluginContext) => {
       data: {
         name: e.name,
         platform: e.platform,
-        handle: e.handle,
+        handle: e.handle
       }
-    });
+    })
 
     const res = await ctx.LPTE.request({
       meta: {
@@ -148,8 +152,8 @@ module.exports = async (ctx: PluginContext) => {
         version: 1
       },
       caster: res.data
-    });
-  });
+    })
+  })
 
   ctx.LPTE.on(namespace, 'request-caster', async (e: any) => {
     const res = await ctx.LPTE.request({
@@ -173,12 +177,12 @@ module.exports = async (ctx: PluginContext) => {
         version: 1
       },
       caster: res.data
-    });
-  });
+    })
+  })
 
   ctx.LPTE.on(namespace, 'swop', (e: any) => {
-    const set : 1 | 2 = e.set || 1
-    
+    const set: 1 | 2 = e.set || 1
+
     if (!gfxState.casterSets[set][0] || !gfxState.casterSets[set][1]) return
 
     const newCaster = [gfxState.casterSets[set][1], gfxState.casterSets[set][0]]
@@ -191,11 +195,11 @@ module.exports = async (ctx: PluginContext) => {
         version: 1
       },
       casterSets: gfxState.casterSets
-    });
-  });
+    })
+  })
 
   ctx.LPTE.on(namespace, 'unset', (e: any) => {
-    const set : 1 | 2 = e.set || 1
+    const set: 1 | 2 = e.set || 1
     gfxState.casterSets[set] = []
 
     ctx.LPTE.emit({
@@ -205,8 +209,8 @@ module.exports = async (ctx: PluginContext) => {
         version: 1
       },
       casterSets: gfxState.casterSets
-    });
-  });
+    })
+  })
 
   // Emit event that we're ready to operate
   ctx.LPTE.emit({
@@ -216,5 +220,5 @@ module.exports = async (ctx: PluginContext) => {
       version: 1
     },
     status: 'RUNNING'
-  });
+  })
 }

@@ -1,5 +1,5 @@
-const urlSearchParams = new URLSearchParams(window.location.search);
-const params = Object.fromEntries(urlSearchParams.entries());
+const urlSearchParams = new URLSearchParams(window.location.search)
+const params = Object.fromEntries(urlSearchParams.entries())
 
 const namespace = 'module-caster'
 
@@ -12,7 +12,7 @@ const casterTwo = document.querySelector('#caster-two')
 const casterTwoName = casterTwo.querySelector('.name')
 const casterTwoSocial = casterTwo.querySelector('.social')
 
-function displayCaster (data) {
+function displayCaster(data) {
   casterOneName.innerHTML = ''
   casterOneSocial.innerHTML = ''
   casterTwoName.innerHTML = ''
@@ -21,23 +21,26 @@ function displayCaster (data) {
   if (!data.casterSets[set] || data.casterSets[set].length <= 0) return
 
   casterOneName.innerHTML = data.casterSets[set][0].name
-  casterOneSocial.appendChild(getSocial(data.casterSets[set][0].platform, data.casterSets[set][0].handle))
+  casterOneSocial.appendChild(
+    getSocial(data.casterSets[set][0].platform, data.casterSets[set][0].handle)
+  )
 
   casterTwoName.innerHTML = data.casterSets[set][1].name
-  casterTwoSocial.appendChild(getSocial(data.casterSets[set][1].platform, data.casterSets[set][1].handle))
+  casterTwoSocial.appendChild(
+    getSocial(data.casterSets[set][1].platform, data.casterSets[set][1].handle)
+  )
 }
 
 function getSocial(platform, handle) {
   const span = document.createElement('span')
-  
-  icon = platform === 'Twitch'
-  ? '<i class="fab fa-twitch"></i>'
-  : '<i class="fab fa-twitter"></i>'
+
+  icon =
+    platform === 'Twitch'
+      ? '<i class="fab fa-twitch"></i>'
+      : '<i class="fab fa-twitter"></i>'
   span.innerHTML += icon
 
-  handle = platform === 'Twitch'
-  ? `twitch.tv/${handle}`
-  : `@${handle}`
+  handle = platform === 'Twitch' ? `twitch.tv/${handle}` : `@${handle}`
   span.innerHTML += handle
 
   return span
@@ -53,7 +56,7 @@ window.LPTE.onready(async () => {
   })
   displayCaster(casterData)
 
-  window.LPTE.on(namespace, 'update', e => {
+  window.LPTE.on(namespace, 'update', (e) => {
     displayCaster(e)
   })
 })
