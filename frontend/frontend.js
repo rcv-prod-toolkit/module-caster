@@ -1,19 +1,6 @@
-$('#caster-embed-1').val(
-  `${location.href}/gfx.html?set=1${
-    window.apiKey !== null ? '&apikey=' + window.apiKey : ''
-  }`
-)
-$('#caster-embed-2').val(
-  `${location.href}/gfx.html?set=2${
-    window.apiKey !== null ? '&apikey=' + window.apiKey : ''
-  }`
-)
-
-
-
 const namespace = 'module-caster'
 
-$('#add-caster-form').on('submit', (e) => {
+document.querySelector('#add-caster-form').addEventListener('submit', (e) => {
   e.preventDefault()
 
   window.LPTE.emit({
@@ -22,17 +9,17 @@ $('#add-caster-form').on('submit', (e) => {
       type: 'add-caster',
       version: 1
     },
-    name: $('#name').val(),
-    platform: $('#platform').val(),
-    handle: $('#handle').val()
+    name: document.querySelector('#name').value,
+    platform: document.querySelector('#platform').value,
+    handle: document.querySelector('#handle').value
   })
 
-  $('#name').val('')
-  $('#platform').val('Twitch')
-  $('#handle').val('')
+  document.querySelector('#name').value = ''
+  document.querySelector('#platform').value = 'Twitch'
+  document.querySelector('#handle').value = ''
 })
 
-$('#update-caster-form').on('submit', (e) => {
+document.querySelector('#update-caster-form').addEventListener('submit', (e) => {
   e.preventDefault()
 
   window.LPTE.emit({
@@ -42,11 +29,14 @@ $('#update-caster-form').on('submit', (e) => {
       version: 1
     },
     set: 1,
-    caster: [$('#caster-one').val(), $('#caster-two').val()]
+    caster: [
+      document.querySelector('#caster-one').value,
+      document.querySelector('#caster-two').value
+    ]
   })
 })
 
-$('#update-caster-2-form').on('submit', (e) => {
+document.querySelector('#update-caster-2-form').addEventListener('submit', (e) => {
   e.preventDefault()
 
   window.LPTE.emit({
@@ -56,7 +46,10 @@ $('#update-caster-2-form').on('submit', (e) => {
       version: 1
     },
     set: 2,
-    caster: [$('#caster-2-one').val(), $('#caster-2-two').val()]
+    caster: [
+      document.querySelector('#caster-2-one').value,
+      document.querySelector('#caster-2-two').value
+    ]
   })
 })
 
@@ -94,6 +87,20 @@ function unset(set = 1) {
 }
 
 async function initUi() {
+  const port =  await window.constants.getWebServerPort()
+  const location = `http://localhost:${port}/pages/op-module-caster/gfx`
+
+  const apiKey =  await window.constants.getApiKey()
+
+  const set1 = `${location}/gfx.html?set=1${apiKey !== null ? '&apikey=' + apiKey: ''}`
+  const set2 = `${location}/gfx/gfx.html?set=2${apiKey !== null ? '&apikey=' + apiKey : ''}`
+
+  document.querySelector('#caster-embed-1').value = set1
+  document.querySelector('#caster-embed-2').value = set2
+
+  document.querySelector('#set-1').src = set1
+  document.querySelector('#set-2').src = set2
+
   const data = await window.LPTE.request({
     meta: {
       namespace,
@@ -117,20 +124,22 @@ async function initUi() {
 }
 
 function displayData(data) {
-  $('#caster-one').val('')
-  $('#caster-two').val('')
-  $('#caster-2-one').val('')
-  $('#caster-2-two').val('')
+  document.querySelector('#caster-one').value = ''
+  document.querySelector('#caster-two').value = ''
+  document.querySelector('#caster-2-one').value = ''
+  document.querySelector('#caster-2-two').value = ''
 
-  $('#caster-one').val(data.casterSets[1][0]?.id || '')
-  $('#caster-two').val(data.casterSets[1][1]?.id || '')
-  $('#caster-2-one').val(data.casterSets[2][0]?.id || '')
-  $('#caster-2-two').val(data.casterSets[2][1]?.id || '')
+  document.querySelector('#caster-one').value = data.casterSets[1][0]?.id || ''
+  document.querySelector('#caster-two').value = data.casterSets[1][1]?.id || ''
+  document.querySelector('#caster-2-one').value = data.casterSets[2][0]?.id || ''
+  document.querySelector('#caster-2-two').value = data.casterSets[2][1]?.id || ''
 }
 
 const casterTableBody = document.querySelector('#caster-table')
 
 function displayCasterTable(data) {
+  if (data.caster === undefined) return
+
   casterTableBody.innerHTML = ''
 
   data.caster.forEach((c) => {
@@ -171,6 +180,8 @@ const casterThree = document.querySelector('#caster-2-one')
 const casterFour = document.querySelector('#caster-2-two')
 
 function displayCasterSelects(data) {
+  if (data.caster === undefined) return
+
   var length = casterOne.options.length
 
   for (let i = length - 1; i >= 1; i--) {
