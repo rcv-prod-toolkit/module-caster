@@ -93,7 +93,7 @@ async function initUi() {
   const apiKey =  await window.constants.getApiKey()
 
   const set1 = `${location}/gfx.html?set=1${apiKey !== null ? '&apikey=' + apiKey: ''}`
-  const set2 = `${location}/gfx/gfx.html?set=2${apiKey !== null ? '&apikey=' + apiKey : ''}`
+  const set2 = `${location}/gfx.html?set=2${apiKey !== null ? '&apikey=' + apiKey : ''}`
 
   document.querySelector('#caster-embed-1').value = set1
   document.querySelector('#caster-embed-2').value = set2
