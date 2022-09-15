@@ -1,11 +1,9 @@
-const namespace = 'module-caster'
-
 document.querySelector('#add-caster-form').addEventListener('submit', (e) => {
   e.preventDefault()
 
   window.LPTE.emit({
     meta: {
-      namespace,
+      namespace: 'module-caster',
       type: 'add-caster',
       version: 1
     },
@@ -24,7 +22,7 @@ document.querySelector('#update-caster-form').addEventListener('submit', (e) => 
 
   window.LPTE.emit({
     meta: {
-      namespace,
+      namespace: 'module-caster',
       type: 'set',
       version: 1
     },
@@ -41,7 +39,7 @@ document.querySelector('#update-caster-2-form').addEventListener('submit', (e) =
 
   window.LPTE.emit({
     meta: {
-      namespace,
+      namespace: 'module-caster',
       type: 'set',
       version: 1
     },
@@ -56,7 +54,7 @@ document.querySelector('#update-caster-2-form').addEventListener('submit', (e) =
 function deleteCaster(id) {
   window.LPTE.emit({
     meta: {
-      namespace,
+      namespace: 'module-caster',
       type: 'delete-caster',
       version: 1
     },
@@ -67,7 +65,7 @@ function deleteCaster(id) {
 function swap(set = 1) {
   window.LPTE.emit({
     meta: {
-      namespace,
+      namespace: 'module-caster',
       type: 'swop',
       version: 1
     },
@@ -78,7 +76,7 @@ function swap(set = 1) {
 function unset(set = 1) {
   window.LPTE.emit({
     meta: {
-      namespace,
+      namespace: 'module-caster',
       type: 'unset',
       version: 1
     },
@@ -103,7 +101,7 @@ async function initUi() {
 
   const data = await window.LPTE.request({
     meta: {
-      namespace,
+      namespace: 'module-caster',
       type: 'request',
       version: 1
     }
@@ -111,7 +109,7 @@ async function initUi() {
 
   const casterData = await window.LPTE.request({
     meta: {
-      namespace,
+      namespace: 'module-caster',
       type: 'request-caster',
       version: 1
     }
@@ -201,8 +199,8 @@ function displayCasterSelects(data) {
 
 window.LPTE.onready(() => {
   initUi()
-  window.LPTE.on(namespace, 'update', displayData)
-  window.LPTE.on(namespace, 'update-caster-set', (data) => {
+  window.LPTE.on('module-caster', 'update', displayData)
+  window.LPTE.on('module-caster', 'update-caster-set', (data) => {
     displayCasterTable(data)
     displayCasterSelects(data)
   })
