@@ -17,39 +17,43 @@ document.querySelector('#add-caster-form').addEventListener('submit', (e) => {
   document.querySelector('#handle').value = ''
 })
 
-document.querySelector('#update-caster-form').addEventListener('submit', (e) => {
-  e.preventDefault()
+document
+  .querySelector('#update-caster-form')
+  .addEventListener('submit', (e) => {
+    e.preventDefault()
 
-  window.LPTE.emit({
-    meta: {
-      namespace: 'module-caster',
-      type: 'set',
-      version: 1
-    },
-    set: 1,
-    caster: [
-      document.querySelector('#caster-one').value,
-      document.querySelector('#caster-two').value
-    ]
+    window.LPTE.emit({
+      meta: {
+        namespace: 'module-caster',
+        type: 'set',
+        version: 1
+      },
+      set: 1,
+      caster: [
+        document.querySelector('#caster-one').value,
+        document.querySelector('#caster-two').value
+      ]
+    })
   })
-})
 
-document.querySelector('#update-caster-2-form').addEventListener('submit', (e) => {
-  e.preventDefault()
+document
+  .querySelector('#update-caster-2-form')
+  .addEventListener('submit', (e) => {
+    e.preventDefault()
 
-  window.LPTE.emit({
-    meta: {
-      namespace: 'module-caster',
-      type: 'set',
-      version: 1
-    },
-    set: 2,
-    caster: [
-      document.querySelector('#caster-2-one').value,
-      document.querySelector('#caster-2-two').value
-    ]
+    window.LPTE.emit({
+      meta: {
+        namespace: 'module-caster',
+        type: 'set',
+        version: 1
+      },
+      set: 2,
+      caster: [
+        document.querySelector('#caster-2-one').value,
+        document.querySelector('#caster-2-two').value
+      ]
+    })
   })
-})
 
 function deleteCaster(id) {
   window.LPTE.emit({
@@ -85,13 +89,17 @@ function unset(set = 1) {
 }
 
 async function initUi() {
-  const port =  await window.constants.getWebServerPort()
-  const location = `http://localhost:${port}/pages/op-module-caster/gfx`
+  const server = await window.constants.getWebServerPort()
+  const location = `http://${server}/pages/op-module-caster/gfx`
 
-  const apiKey =  await window.constants.getApiKey()
+  const apiKey = await window.constants.getApiKey()
 
-  const set1 = `${location}/gfx.html?set=1${apiKey !== null ? '&apikey=' + apiKey: ''}`
-  const set2 = `${location}/gfx.html?set=2${apiKey !== null ? '&apikey=' + apiKey : ''}`
+  const set1 = `${location}/gfx.html?set=1${
+    apiKey !== null ? '&apikey=' + apiKey : ''
+  }`
+  const set2 = `${location}/gfx.html?set=2${
+    apiKey !== null ? '&apikey=' + apiKey : ''
+  }`
 
   document.querySelector('#caster-embed-1').value = set1
   document.querySelector('#caster-embed-2').value = set2
@@ -129,8 +137,10 @@ function displayData(data) {
 
   document.querySelector('#caster-one').value = data.casterSets[1][0]?.id || ''
   document.querySelector('#caster-two').value = data.casterSets[1][1]?.id || ''
-  document.querySelector('#caster-2-one').value = data.casterSets[2][0]?.id || ''
-  document.querySelector('#caster-2-two').value = data.casterSets[2][1]?.id || ''
+  document.querySelector('#caster-2-one').value =
+    data.casterSets[2][0]?.id || ''
+  document.querySelector('#caster-2-two').value =
+    data.casterSets[2][1]?.id || ''
 }
 
 const casterTableBody = document.querySelector('#caster-table')
