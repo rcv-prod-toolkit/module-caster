@@ -102,7 +102,11 @@ async function initUi() {
   }`
 
   document.querySelector('#caster-embed-1').value = set1
+  document.querySelector('#caster-embed-1-1').value = set1 + '&caster=1'
+  document.querySelector('#caster-embed-1-2').value = set1 + '&caster=2'
   document.querySelector('#caster-embed-2').value = set2
+  document.querySelector('#caster-embed-2-1').value = set2 + '&caster=1'
+  document.querySelector('#caster-embed-2-2').value = set2 + '&caster=2'
 
   document.querySelector('#set-1').src = set1
   document.querySelector('#set-2').src = set2

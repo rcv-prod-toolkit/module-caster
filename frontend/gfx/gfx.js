@@ -4,6 +4,7 @@ const params = Object.fromEntries(urlSearchParams.entries())
 const namespace = 'module-caster'
 
 const set = params.set || 1
+const caster = params.caster
 
 const casterOne = document.querySelector('#caster-one')
 const casterOneName = casterOne.querySelector('.name')
@@ -17,6 +18,17 @@ function displayCaster(data) {
   casterOneSocial.innerHTML = ''
   casterTwoName.innerHTML = ''
   casterTwoSocial.innerHTML = ''
+
+  if (caster !== undefined && caster !== '1') {
+    casterOne.style.display = 'none'
+  } else {
+    casterOne.style.display = 'flex'
+  }
+  if (caster !== undefined && caster !== '2') {
+    casterTwo.style.display = 'none'
+  } else {
+    casterTwo.style.display = 'flex'
+  }
 
   if (!data.casterSets[set] || data.casterSets[set].length <= 0) return
 
@@ -34,7 +46,7 @@ function displayCaster(data) {
 function getSocial(platform, handle) {
   const span = document.createElement('span')
 
-  icon =
+  const icon =
     platform === 'Twitch'
       ? '<i class="fab fa-twitch"></i>'
       : '<i class="fab fa-twitter"></i>'
