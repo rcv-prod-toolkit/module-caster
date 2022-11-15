@@ -1,6 +1,6 @@
 <h1>RCVolus Caster: Operator Cockpit</h1>
 
-<div style="display: flex;gap: 1rem;">
+<div style="display: flex; gap: 1rem">
   <div>
     <div style="width: 480px; height: 270px; overflow: hidden">
       <iframe
@@ -10,7 +10,12 @@
         id="set-1"
       ></iframe>
     </div>
-    <input style="width: 100%; margin: 1rem 0" readonly id="caster-embed-1" class="form-control" />
+    <input
+      style="width: 100%; margin: 1rem 0"
+      readonly
+      id="caster-embed-1"
+      class="form-control"
+    />
   </div>
   <div>
     <div style="width: 480px; height: 270px; overflow: hidden">
@@ -21,15 +26,25 @@
         id="set-2"
       ></iframe>
     </div>
-    <input style="width: 100%; margin: 1rem 0" readonly id="caster-embed-2" class="form-control" />
+    <input
+      style="width: 100%; margin: 1rem 0"
+      readonly
+      id="caster-embed-2"
+      class="form-control"
+    />
   </div>
 </div>
 
 <form id="update-caster-form" class="mt-3">
-  <div style="display: flex;">
+  <div style="display: flex">
     <div class="form-group w-50 mr-3">
       <label for="caster-one">Caster 1</label>
-      <input style="width: 100%; margin: 1rem 0" readonly id="caster-embed-1-1" class="form-control" />
+      <input
+        style="width: 100%; margin: 1rem 0"
+        readonly
+        id="caster-embed-1-1"
+        class="form-control"
+      />
       <select
         class="form-control"
         id="caster-one"
@@ -41,7 +56,12 @@
     </div>
     <div class="form-group w-50">
       <label for="caster-two">Caster 2</label>
-      <input style="width: 100%; margin: 1rem 0" readonly id="caster-embed-1-2" class="form-control" />
+      <input
+        style="width: 100%; margin: 1rem 0"
+        readonly
+        id="caster-embed-1-2"
+        class="form-control"
+      />
       <select
         class="form-control"
         id="caster-two"
@@ -52,7 +72,7 @@
       </select>
     </div>
   </div>
-  <div style="display: flex;">
+  <div style="display: flex">
     <button type="submit" class="btn btn-primary w-75 mr-3">Update</button>
     <button type="button" class="btn btn-secondary w-25 mr-3" onclick="swap()">
       Swap
@@ -64,10 +84,15 @@
 </form>
 
 <form id="update-caster-2-form" class="mt-5">
-  <div style="display: flex;">
+  <div style="display: flex">
     <div class="form-group w-50 mr-3">
       <label for="caster-2-one">Caster 1</label>
-      <input style="width: 100%; margin: 1rem 0" readonly id="caster-embed-2-1" class="form-control" />
+      <input
+        style="width: 100%; margin: 1rem 0"
+        readonly
+        id="caster-embed-2-1"
+        class="form-control"
+      />
       <select
         class="form-control"
         id="caster-2-one"
@@ -79,7 +104,12 @@
     </div>
     <div class="form-group w-50">
       <label for="caster-2-two">Caster 2</label>
-      <input style="width: 100%; margin: 1rem 0" readonly id="caster-embed-2-2" class="form-control" />
+      <input
+        style="width: 100%; margin: 1rem 0"
+        readonly
+        id="caster-embed-2-2"
+        class="form-control"
+      />
       <select
         class="form-control"
         id="caster-2-two"
@@ -90,7 +120,7 @@
       </select>
     </div>
   </div>
-  <div style="display: flex;">
+  <div style="display: flex">
     <button type="submit" class="btn btn-primary w-75 mr-3">Update</button>
     <button type="button" class="btn btn-secondary w-25 mr-3" onclick="swap(2)">
       Swap
