@@ -162,10 +162,7 @@ function displayCasterTable(data) {
     row.appendChild(nameTd)
 
     const platformTd = document.createElement('td')
-    platformTd.innerHTML =
-      c.platform === 'Twitch'
-        ? '<i class="fab fa-twitch"></i>'
-        : '<i class="fab fa-twitter"></i>'
+    platformTd.innerHTML = `<i class="fab fa-${c.platform.toLowerCase()}"></i>`
     row.appendChild(platformTd)
 
     const handleTd = document.createElement('td')

@@ -46,13 +46,16 @@ function displayCaster(data) {
 function getSocial(platform, handle) {
   const span = document.createElement('span')
 
-  const icon =
-    platform === 'Twitch'
-      ? '<i class="fab fa-twitch"></i>'
-      : '<i class="fab fa-twitter"></i>'
+  const icon =`<i class="fab fa-${platform.toLowerCase()}"></i>`
   span.innerHTML += icon
 
-  handle = platform === 'Twitch' ? `twitch.tv/${handle}` : `@${handle}`
+  switch(platform) {
+    case 'Twitch':
+      handle = `twitch.tv/${handle}`
+      break;
+    default:
+      handle = `@${handle}`
+  }
   span.innerHTML += handle
 
   return span
