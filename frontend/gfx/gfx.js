@@ -36,20 +36,12 @@ function displayCaster(data) {
 
   if (!data.casterSets[set] || data.casterSets[set].length <= 0) return
 
-  casterOneLogo.addEventListener('error', (e) => {
-    casterOneLogo.style.visibility = 'hidden'
-  })
-  casterOneLogo.style.visibility = ''
   casterOneLogo.src = `/pages/op-module-caster/img/${data.casterSets[set][0].logo}`
   casterOneName.innerHTML = data.casterSets[set][0].name
   casterOneSocial.appendChild(
     getSocial(data.casterSets[set][0].platform, data.casterSets[set][0].handle)
     )
-  
-  casterTwoLogo.addEventListener('error', (e) => {
-    casterTwoLogo.style.visibility = 'hidden'
-  })
-  casterTwoLogo.style.visibility = ''
+
   casterTwoLogo.src = `/pages/op-module-caster/img/${data.casterSets[set][1].logo}`
   casterTwoName.innerHTML = data.casterSets[set][1].name
   casterTwoSocial.appendChild(
