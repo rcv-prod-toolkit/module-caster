@@ -7,15 +7,19 @@ const set = params.set || 1
 const caster = params.caster
 
 const casterOne = document.querySelector('#caster-one')
+const casterOneLogo = casterOne.querySelector('.logo')
 const casterOneName = casterOne.querySelector('.name')
 const casterOneSocial = casterOne.querySelector('.social')
 const casterTwo = document.querySelector('#caster-two')
+const casterTwoLogo = casterTwo.querySelector('.logo')
 const casterTwoName = casterTwo.querySelector('.name')
 const casterTwoSocial = casterTwo.querySelector('.social')
 
 function displayCaster(data) {
+  casterOneLogo.src = ''
   casterOneName.innerHTML = ''
   casterOneSocial.innerHTML = ''
+  casterTwoLogo.src = ''
   casterTwoName.innerHTML = ''
   casterTwoSocial.innerHTML = ''
 
@@ -32,11 +36,19 @@ function displayCaster(data) {
 
   if (!data.casterSets[set] || data.casterSets[set].length <= 0) return
 
+  casterOneLogo.addEventListener('error', (e) => {
+    casterOneLogo.style.visibility = 'hidden'
+  })
+  casterOneLogo.src = `/pages/op-module-caster/img/${data.casterSets[set][0].logo}`
   casterOneName.innerHTML = data.casterSets[set][0].name
   casterOneSocial.appendChild(
     getSocial(data.casterSets[set][0].platform, data.casterSets[set][0].handle)
-  )
-
+    )
+  
+  casterTwoLogo.addEventListener('error', (e) => {
+    casterTwoLogo.style.visibility = 'hidden'
+  })
+  casterTwoLogo.src = `/pages/op-module-caster/img/${data.casterSets[set][1].logo}`
   casterTwoName.innerHTML = data.casterSets[set][1].name
   casterTwoSocial.appendChild(
     getSocial(data.casterSets[set][1].platform, data.casterSets[set][1].handle)

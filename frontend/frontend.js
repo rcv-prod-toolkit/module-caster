@@ -1,5 +1,7 @@
-document.querySelector('#add-caster-form').addEventListener('submit', (e) => {
+document.querySelector('#add-caster-form').addEventListener('submit', async (e) => {
   e.preventDefault()
+
+  const upload = await updateFile(document.querySelector('#logo').files[0], document.querySelector('#name').value)
 
   window.LPTE.emit({
     meta: {
@@ -7,11 +9,13 @@ document.querySelector('#add-caster-form').addEventListener('submit', (e) => {
       type: 'add-caster',
       version: 1
     },
+    logo: upload.data.name,
     name: document.querySelector('#name').value,
     platform: document.querySelector('#platform').value,
     handle: document.querySelector('#handle').value
   })
 
+  document.querySelector('#logo').value = null
   document.querySelector('#name').value = ''
   document.querySelector('#platform').value = 'Twitch'
   document.querySelector('#handle').value = ''
@@ -157,6 +161,13 @@ function displayCasterTable(data) {
   data.caster.forEach((c) => {
     const row = document.createElement('tr')
 
+    const logoTd = document.createElement('td')
+    const logoImg = document.createElement('img')
+    logoImg.src = `/pages/op-module-caster/img/${c.logo}`
+    logoImg.style.height = '2.3rem'
+    logoTd.appendChild(logoImg)
+    row.appendChild(logoTd)
+
     const nameTd = document.createElement('td')
     nameTd.innerText = c.name
     row.appendChild(nameTd)
@@ -206,6 +217,25 @@ function displayCasterSelects(data) {
     casterThree.options.add(new Option(c.name, c.id), [i + 1])
     casterFour.options.add(new Option(c.name, c.id), [i + 1])
   })
+}
+
+async function updateFile(file, name) {
+  if(!file) return
+
+  const ext = file.name.split('.').pop()
+
+  const form = new FormData()
+  form.append('file', file, `module-caster/frontend/img/${name}.${ext}`)
+  form.append('path', 'module-caster/frontend/img')
+
+  const response = await fetch('/upload', {
+    method: 'POST',
+    body: form
+  })
+
+  const json = await response.json()
+
+  return json
 }
 
 window.LPTE.onready(() => {
