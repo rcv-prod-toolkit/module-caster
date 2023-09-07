@@ -135,6 +135,10 @@ async function initUi() {
   displayCasterSelects(casterData)
 
   displayData(data)
+
+  document.querySelector('#logo').addEventListener('change', (e) => {
+    document.querySelector('.custom-file-label').textContent = document.querySelector('#logo').files[0].name
+  })
 }
 
 function displayData(data) {
