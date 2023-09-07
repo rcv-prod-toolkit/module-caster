@@ -9,13 +9,14 @@ document.querySelector('#add-caster-form').addEventListener('submit', async (e) 
       type: 'add-caster',
       version: 1
     },
-    logo: upload.data.name,
+    logo: upload?.data.name,
     name: document.querySelector('#name').value,
     platform: document.querySelector('#platform').value,
     handle: document.querySelector('#handle').value
   })
 
   document.querySelector('#logo').value = null
+  document.querySelector('.custom-file-label').textContent = 'Choose file'
   document.querySelector('#name').value = ''
   document.querySelector('#platform').value = 'Twitch'
   document.querySelector('#handle').value = ''
