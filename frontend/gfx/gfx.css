@@ -50,6 +50,8 @@ body {
   border-radius: 50%;
   aspect-ratio: 1;
   transform: translateX(-25%);
+  object-fit: contain;
+  background: var(--background-color);
 }
 
 .caster-box .text {
