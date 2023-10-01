@@ -46,12 +46,10 @@ body {
 .caster-box .logo {
   position: relative;
   z-index: 5;
-  border: 2px solid black;
   border-radius: 50%;
   aspect-ratio: 1;
   transform: translateX(-25%);
   object-fit: contain;
-  background: var(--background-color);
 }
 
 .caster-box .text {
