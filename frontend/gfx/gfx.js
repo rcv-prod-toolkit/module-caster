@@ -66,6 +66,8 @@ function getSocial(platform, handle) {
       handle = `twitch.tv/${handle}`
       break;
     case 'X-Twitter':
+      handle = `@${handle}`
+      break;
     case 'Discord':
       handle = `@${handle}`
       break;
