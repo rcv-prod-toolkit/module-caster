@@ -125,6 +125,7 @@ module.exports = async (ctx: PluginContext) => {
       },
       collection: 'caster',
       data: {
+        logo: e.logo,
         name: e.name,
         platform: e.platform,
         handle: e.handle
