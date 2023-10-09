@@ -134,6 +134,7 @@
 <table class="table mb-3 mt-5">
   <thead>
     <tr>
+      <th scope="col">Logo</th>
       <th scope="col">Name</th>
       <th scope="col">Platform</th>
       <th scope="col">Handle</th>
@@ -144,8 +145,20 @@
 </table>
 
 <form id="add-caster-form">
-  <div class="d-flex">
-    <div class="form-group w-50 mr-3">
+  <div class="d-flex" style="gap: 1rem">
+    <div class="form-group w-25">
+      <label for="logo">Logo</label>
+      <div class="custom-file">
+        <input
+          type="file"
+          class="custom-file-input"
+          id="logo"
+          accept="image/*"
+        />
+        <label class="custom-file-label" for="logo">Choose file</label>
+      </div>
+    </div>
+    <div class="form-group w-50">
       <label for="name">Name</label>
       <input
         type="text"
@@ -156,7 +169,7 @@
         placeholder="Name"
       />
     </div>
-    <div class="form-group w-25 mr-3">
+    <div class="form-group w-25">
       <label for="platform">Social Platform</label>
       <select
         class="form-control"
@@ -165,7 +178,9 @@
         aria-describedby="Platform"
       >
         <option>Twitch</option>
-        <option>Twitter</option>
+        <option>X-Twitter</option>
+        <option>Instagram</option>
+        <option>Discord</option>
       </select>
     </div>
     <div class="form-group w-50">
