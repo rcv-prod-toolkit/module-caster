@@ -60,15 +60,22 @@ function getSocial(platform, handle) {
 
   const icon =`<i class="fab fa-${platform.toLowerCase()}"></i>`
   span.innerHTML += icon
-
+  handle = handle.trim()
+  
   switch(platform) {
     case 'Twitch':
       handle = `twitch.tv/${handle}`
       break;
+    case 'LinkedIn':
+      handle = `linkedin.com/in/${handle}`
+      break
+    case 'Telegram':
+      handle = `t.me/${handle}`
+      break
     case 'X-Twitter':
-      handle = `@${handle}`
-      break;
     case 'Discord':
+    case 'TikTok':
+    case 'YouTube':
       handle = `@${handle}`
       break;
   }
