@@ -94,8 +94,8 @@ function unset(set = 1) {
 }
 
 async function initUi() {
-  const server = await window.constants.getWebServerPort()
-  const location = `http://${server}/pages/op-module-caster/gfx`
+  const server = await window.constants.getModuleURL()
+  const location = `${server}/gfx`
 
   const apiKey = await window.constants.getApiKey()
 
