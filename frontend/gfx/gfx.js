@@ -78,6 +78,9 @@ function getSocial(platform, handle) {
     case 'YouTube':
       handle = `@${handle}`
       break;
+    case 'LinkTree':
+      handle = `linktr.ee/${handle}`
+      break;
   }
   span.innerHTML += handle
 
