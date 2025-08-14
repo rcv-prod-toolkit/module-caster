@@ -58,7 +58,7 @@ function displayCaster(data) {
 function getSocial(platform, handle) {
   const span = document.createElement('span')
 
-  const icon =`<i class="fab fa-${platform.toLowerCase()}"></i>`
+  const icon =`<i class="fa-brands fa-${platform.toLowerCase()}"></i>`
   span.innerHTML += icon
   handle = handle.trim()
   
