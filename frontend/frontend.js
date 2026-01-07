@@ -178,7 +178,7 @@ function displayCasterTable(data) {
     row.appendChild(nameTd)
 
     const platformTd = document.createElement('td')
-    platformTd.innerHTML = `<i class="fab fa-${c.platform.toLowerCase()}"></i>`
+    platformTd.innerHTML = `<i class="fa-brands fa-${c.platform.toLowerCase()}"></i>`
     row.appendChild(platformTd)
 
     const handleTd = document.createElement('td')
